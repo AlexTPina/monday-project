@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
@@ -9,9 +9,18 @@ class App extends Component {
     message: ''
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:8000/api/message')
+      .then((res) => {
+        this.setState({ message: res.data })
+      })
+  }
   render() {
     return (
-      <div>FS TODO APP</div>
+      <React.Fragment>
+        <div>FS TODO APP</div>
+        <div>Message: {this.state.message}</div>
+      </React.Fragment>
     )
   }
 
